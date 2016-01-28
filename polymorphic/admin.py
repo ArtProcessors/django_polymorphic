@@ -310,14 +310,7 @@ class PolymorphicParentModelAdmin(admin.ModelAdmin):
         # At this point. all admin code needs to be known.
         self._lazy_setup()
 
-        # Add reverse names for all polymorphic models, so the delete button and "save and add" just work.
-        # These definitions are masked by the definition above, since it needs special handling (and a ct_id parameter).
-        dummy_urls = []
-        for model, _ in self.get_child_models():
-            admin = self._get_real_admin_by_model(model)
-            dummy_urls += admin.get_urls()
-
-        return urls + custom_urls + dummy_urls
+        return urls + custom_urls
 
     def subclass_view(self, request, path):
         """
